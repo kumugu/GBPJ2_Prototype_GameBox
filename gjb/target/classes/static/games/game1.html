@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Click Challenge</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="css/style_game1.css">
+</head>
+<body>
+    <h1>클릭 빨리 하기</h1>
+    <button id="start-btn">시작</button>
+    <button id="click-btn" style="display:none;">누르세요!</button>
+    <p id="score">점수: 0</p>
+    <p id="timer">남은 시간: 10 초</p>
+
+    <script>
+        let score = 0;
+        let timeLeft = 10;
+        const scoreDisplay = document.getElementById("score");
+        const timerDisplay = document.getElementById("timer");
+        const clickButton = document.getElementById("click-btn");
+        const startButton = document.getElementById("start-btn");
+
+        startButton.addEventListener("click", () => {
+            score = 0;
+            timeLeft = 10;
+            clickButton.style.display = "inline-block";
+            startButton.style.display = "none";
+
+            const timer = setInterval(() => {
+                timeLeft--;
+                timerDisplay.textContent = `Time left: ${timeLeft} seconds`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    clickButton.style.display = "none";
+                    startButton.style.display = "inline-block";
+                    alert(`Game over! Your score is ${score}`);
+                }
+            }, 1000);
+        });
+
+        clickButton.addEventListener("click", () => {
+            score++;
+            scoreDisplay.textContent = `Score: ${score}`;
+        });
+    </script>
+</body>
+</html>
