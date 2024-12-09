@@ -28,4 +28,9 @@ public class UserService {
         }
         return null;
     }
+
+    public boolean isEmailTaken(String email) {
+        return userRepository.findByEmail(email) != null;
+    }
+
 }

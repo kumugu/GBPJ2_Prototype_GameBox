@@ -58,3 +58,48 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+
+// 프론트엔드와 백엔드 통신 (AJAX)
+document.getElementById('signup-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = {
+        username: e.target.username.value,
+        password: e.target.password.value,
+        email: e.target.email.value
+    };
+
+    try {
+        const response = await fetch('/api/users/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        const result = await response.text();
+        if (response.ok) {
+            alert(result); // 성공 메시지
+        } else {
+            alert('회원가입 실패: ' + result);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+
+// 프론트엔드 중복 체크 로직
+document.getElementById('email-input').addEventListener('blur', async (e) => {
+    const email = e.target.value;
+    try {
+        const response = await fetch(`/api/users/check-email?email=${email}`);
+        const isTaken = await response.json();
+        if (isTaken) {
+            alert('이 이메일은 이미 사용 중입니다.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+
