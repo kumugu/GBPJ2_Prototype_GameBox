@@ -6,6 +6,7 @@
     <title>Game Platform</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/user.css">
 </head>
 
 <body>
@@ -30,49 +31,46 @@
         </div>
     </header>
 
-<!-- 로그인 모달 -->
-<div id="login-modal" class="modal hidden">
-    <div class="modal-content">
-        <!-- 로그인 섹션 -->
-        <div class="auth-section">
-            <h2>Login</h2>
-            <form id="login-form">
-                <input type="text" name="username" placeholder="Username" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <button type="submit">Login</button>
-            </form>
-            <!-- 회원가입 버튼 -->
-            <p><button id="toggle-to-signup" class="signup-btn">Sign Up</button></p>
+    <!-- 로그인 모달 -->
+    <div id="login-modal" class="modal hidden">
+        <div class="modal-content">
+            <!-- 로그인 섹션 -->
+            <div class="auth-section">
+                <h2>Login</h2>
+                <form id="login-form">
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <!-- 회원가입 버튼 -->
+                <p><button id="toggle-to-signup" class="signup-btn">Sign Up</button></p>
+            </div>
+
+            <!-- 닫기 버튼 -->
+            <button class="close-modal" id="close-login-modal">X</button>
         </div>
-
-        <!-- 닫기 버튼 -->
-        <button class="close-modal" id="close-login-modal">X</button>
     </div>
-</div>
 
-<!-- 회원가입 모달 -->
-<div id="signup-modal" class="modal hidden">
-    <div class="modal-content">
-        <!-- 회원가입 섹션 -->
-        <div class="auth-section">
-            <h2>Sign Up</h2>
-            <form id="signup-form">
-                <input type="text" name="username" placeholder="Username" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <button type="submit">Sign Up</button>
-            </form>
-            <!-- 뒤로가기 버튼 -->
-            <p><button id="back-to-login">Back</button></p>
+    <!-- 회원가입 모달 -->
+    <div id="signup-modal" class="modal hidden">
+        <div class="modal-content">
+            <!-- 회원가입 섹션 -->
+            <div class="auth-section">
+                <h2>Sign Up</h2>
+                <form id="signup-form">
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <button type="submit">Sign Up</button>
+                </form>
+                <!-- 뒤로가기 버튼 -->
+                <p><button id="back-to-login">Back</button></p>
+            </div>
+
+            <!-- 닫기 버튼 -->
+            <button class="close-modal" id="close-signup-modal">X</button>
         </div>
-
-        <!-- 닫기 버튼 -->
-        <button class="close-modal" id="close-signup-modal">X</button>
     </div>
-</div>
-
-
-
 
     <!-- 중앙 섹션 -->
     <section id="games-section" class="games-layout">
@@ -97,7 +95,6 @@
         <!-- 좌측 스크롤 슬라이더 -->
         <button class="toggle-left" id="left-toggle">◀</button>
         <div class="interactive-slider" id="left-panel">
-            
             <div class="slider-item">
                 <a href="games/game1.html" target="_blank">
                     <img src="images/testImg_1.jpg" alt="Click Challenge">
@@ -108,7 +105,6 @@
                     <img src="images/testImg_2.jpg" alt="Number Guess">
                 </a>
             </div>
-            
             <div class="slider-item"><img src="images/testImg_3.jpg" alt="testGame3"></div>
             <div class="slider-item"><img src="images/testImg_4.jpg" alt="testGame4"></div>
             <div class="slider-item"><img src="images/testImg_5.jpg" alt="testGame5"></div>

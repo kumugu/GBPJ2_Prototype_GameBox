@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeLoginModal = document.getElementById("close-login-modal"); // 로그인 모달 닫기 버튼
     const closeSignupModal = document.getElementById("close-signup-modal"); // 회원가입 모달 닫기 버튼
     const backToLoginBtn = document.getElementById("back-to-login"); // 회원가입 뒤로가기 버튼
+    const userActions = document.querySelector('.user-actions');
+    const toggleToSignupBtn = document.getElementById('toggle-to-signup');
+    const toggleToLoginBtn = document.getElementById('toggle-to-login');
 
     // 로그인 버튼 클릭 시 로그인 모달 열기
     if (loginBtn) {
@@ -34,17 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // // 회원가입 모달 닫기 버튼 클릭 시 회원가입 모달 닫기
-    // if (closeSignupModal) {
-    //     closeSignupModal.addEventListener("click", () => {
-    //         signupModal.classList.add("hidden");
-    //         signupModal.classList.remove("active");
-    //     });
-    // }
-    // 회원가입 모달 닫기 버튼 클릭 시 index.html로 이동
+    // 회원가입 모달 닫기 버튼 클릭 시 모달 닫기
     if (closeSignupModal) {
         closeSignupModal.addEventListener("click", () => {
-            window.location.href = "index.html"; // index.html로 이동
+            signupModal.classList.add("hidden");
+            signupModal.classList.remove("active");
         });
     }
 
@@ -57,49 +54,41 @@ document.addEventListener("DOMContentLoaded", () => {
             loginModal.classList.add("active");
         });
     }
-});
 
+    // 로그인 폼 제출 시 UI 업데이트
+document.getElementById("login-form").addEventListener("submit", (event) => {
+    event.preventDefault(); // 폼 제출 방지
 
-// 프론트엔드와 백엔드 통신 (AJAX)
-document.getElementById('signup-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = {
-        username: e.target.username.value,
-        password: e.target.password.value,
-        email: e.target.email.value
-    };
+    const userActions = document.querySelector('.user-actions');
+    const loginBtn = document.querySelector('.login-btn');
 
-    try {
-        const response = await fetch('/api/users/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        });
+    // 로그인 모달 닫기
+    const loginModal = document.getElementById("login-modal");
+    loginModal.classList.add("hidden");
+    loginModal.classList.remove("active");
 
-        const result = await response.text();
-        if (response.ok) {
-            alert(result); // 성공 메시지
-        } else {
-            alert('회원가입 실패: ' + result);
-        }
-    } catch (error) {
-        console.error('Error:', error);
+    // 기존 login-btn을 User123으로 변경
+    if (loginBtn) {
+        loginBtn.outerHTML = `
+            <div class="user-menu">
+                <button class="user-btn">User123</button>
+                <div class="user-dropdown">
+                    <a href="/profile">My Profile</a>
+                    <button id="logout-btn">Logout</button>
+                </div>
+            </div>
+        `;
     }
+
+    console.log('사용자 메뉴로 변경되었습니다.');
+
+    // 로그아웃 버튼 동작 확인
+    document.getElementById("logout-btn").addEventListener("click", () => {
+        alert("로그아웃 버튼 클릭됨");
+        location.reload(); // 페이지 새로고침
+    });
 });
 
-// 프론트엔드 중복 체크 로직
-document.getElementById('email-input').addEventListener('blur', async (e) => {
-    const email = e.target.value;
-    try {
-        const response = await fetch(`/api/users/check-email?email=${email}`);
-        const isTaken = await response.json();
-        if (isTaken) {
-            alert('이 이메일은 이미 사용 중입니다.');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-    }
-});
+    
 
+});
