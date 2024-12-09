@@ -1,0 +1,201 @@
+/* 숨겨진 섹션 */
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.3s, opacity 0.3s ease;
+}
+
+/* 활성화된 모달 */
+.modal.active {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s 0s, opacity 0.3s ease;
+}
+
+/* 활성화된 섹션 */
+.auth-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 숨겨진 모달 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s;
+}
+
+
+/* 모달 콘텐츠 */
+.modal-content {
+    background: black;
+    border: 2px solid #39ff14;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 0 20px #39ff14;
+}
+
+/* 로그인/회원가입 공통 스타일 */
+.auth-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.auth-section input {
+    padding: 10px;
+    border: 2px solid #39ff14;
+    border-radius: 5px;
+    background: black;
+    color: #39ff14;
+    font-size: 14px;
+}
+
+.auth-section button {
+    padding: 10px;
+    background: #39ff14;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.auth-section button:hover {
+    background: #ffff33;
+}
+
+/* 닫기 버튼 */
+.close-modal {
+    background: transparent;
+    color: #39ff14;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.close-modal:hover {
+    color: #ffff33;
+}
+
+
+/* 로그인 폼 전체를 화면 가운데로 정렬 */
+#login-form {
+    display: flex;
+    flex-direction: column; /* 입력란을 세로로 배치 */
+    align-items: center; /* 가운데 정렬 */
+    justify-content: center; /* 상하 정렬 */
+    gap: 15px; /* 입력란과 버튼 사이 간격 */
+    width: 100%; /* 폼의 너비를 적절히 설정 */
+    max-width: 300px; /* 폼의 최대 너비 제한 */
+    margin: 0 auto; /* 폼을 수평 중앙으로 정렬 */
+    padding: 20px; /* 내부 여백 */
+    background-color: #111; /* 배경색 (선택사항) */
+    border-radius: 10px; /* 둥근 모서리 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 */
+}
+
+/* 입력란 스타일 */
+#login-form input {
+    width: 80%; /* 입력란이 폼의 너비를 따라감 */
+    padding: 10px;
+    border: 2px solid #39ff14;
+    border-radius: 5px;
+    background: black;
+    color: #39ff14;
+    font-size: 14px;
+    text-align: left; /* 입력 텍스트 왼쪽 정렬 */
+}
+
+/* 버튼 스타일 */
+#login-form button {
+    width: 50%; /* 버튼이 폼 너비에 맞게 확장 */
+    padding: 10px;
+    background: #39ff14;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#login-form button:hover {
+    background: #ffff33;
+}
+
+
+/* 회원가입 폼 스타일 */
+#signup-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 가운데 정렬 */
+    gap: 15px; /* 입력란과 버튼 사이 간격 */
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #111;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#signup-form input {
+    width: 80%;
+    padding: 10px;
+    border: 2px solid #39ff14;
+    border-radius: 5px;
+    background: black;
+    color: #39ff14;
+    font-size: 14px;
+}
+
+#signup-form button {
+    width: 50%;
+    padding: 10px;
+    background: #39ff14;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#signup-form button:hover {
+    background: #ffff33;
+}
+
+/* 뒤로가기 버튼 스타일 */
+#back-to-login {
+    margin-top: 10px;
+    padding: 10px;
+    background: #444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+}
+
+#back-to-login:hover {
+    background: #666;
+}

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Platform</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modal.css">
 </head>
 
 <body>
@@ -28,8 +29,52 @@
             </div>
         </div>
     </header>
-    
-    
+
+<!-- 로그인 모달 -->
+<div id="login-modal" class="modal hidden">
+    <div class="modal-content">
+        <!-- 로그인 섹션 -->
+        <div class="auth-section">
+            <h2>Login</h2>
+            <form id="login-form">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <!-- 회원가입 버튼 -->
+            <p><button id="toggle-to-signup" class="signup-btn">Sign Up</button></p>
+        </div>
+
+        <!-- 닫기 버튼 -->
+        <button class="close-modal" id="close-login-modal">X</button>
+    </div>
+</div>
+
+<!-- 회원가입 모달 -->
+<div id="signup-modal" class="modal hidden">
+    <div class="modal-content">
+        <!-- 회원가입 섹션 -->
+        <div class="auth-section">
+            <h2>Sign Up</h2>
+            <form id="signup-form">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <button type="submit">Sign Up</button>
+            </form>
+            <!-- 뒤로가기 버튼 -->
+            <p><button id="back-to-login">Back</button></p>
+        </div>
+
+        <!-- 닫기 버튼 -->
+        <button class="close-modal" id="close-signup-modal">X</button>
+    </div>
+</div>
+
+
+
+
+    <!-- 중앙 섹션 -->
     <section id="games-section" class="games-layout">
         <!-- 중앙 콘텐츠 -->
         <div class="main-content">
@@ -69,9 +114,7 @@
             <div class="slider-item"><img src="images/testImg_5.jpg" alt="testGame5"></div>
             <div class="slider-item"><img src="images/testImg_6.jpg" alt="testGame6"></div>
         </div>
-    
-          
-    
+
         <!-- 우측 채팅 -->
         <button class="toggle-right" id="right-toggle">▶</button>
         <div class="right-content" id="right-panel">
@@ -89,9 +132,6 @@
         </div>
     </section>
 
-
-
-    
     <!-- 푸터 -->
     <footer class="site-footer">
         <div class="footer-content">
@@ -104,9 +144,9 @@
         </div>
     </footer>
 
-
     <script src="js/main_anima.js"></script>
     <script src="js/slider_control.js"></script>
+    <script src="js/modal.js"></script>
 
 </body>
 </html>

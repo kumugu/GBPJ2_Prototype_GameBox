@@ -54,10 +54,10 @@ document.addEventListener("DOMContentLoaded", () => {
         navLinks.classList.toggle("visible");
     });
 
-    const loginBtn = document.querySelector(".login-btn");
-    loginBtn.addEventListener("click", () => {
-        alert("Login functionality to be implemented!");
-    });
+//    const loginBtn = document.querySelector(".login-btn");
+//    loginBtn.addEventListener("click", () => {
+//        alert("Login functionality to be implemented!");
+//    });
 });
 
 
