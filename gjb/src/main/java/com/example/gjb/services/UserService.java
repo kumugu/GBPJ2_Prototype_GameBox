@@ -2,6 +2,7 @@ package com.example.gjb.services;
 
 import com.example.gjb.models.User;
 import com.example.gjb.repositories.UserRepository;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,4 +29,9 @@ public class UserService {
         }
         return null;
     }
+
+    public boolean isEmailTaken(String email) {
+        return userRepository.findByEmail(email) != null;
+    }
+
 }

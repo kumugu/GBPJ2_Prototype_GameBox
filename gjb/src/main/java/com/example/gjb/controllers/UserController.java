@@ -4,6 +4,8 @@ import com.example.gjb.models.User;
 import com.example.gjb.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.Map;
+
 
 @RestController
 @RequestMapping("/api/users")
@@ -17,16 +19,31 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody User user) {
-        userService.registerUser(user);
-        return ResponseEntity.ok("User registered successfully!");
+        try {
+            userService.registerUser(user);
+            return ResponseEntity.ok("User registered successfully!");
+        } catch (Exception e) {
+            return ResponseEntity.status(400).body("Registration failed: " + e.getMessage());
+        }
     }
 
+
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
+    public ResponseEntity<?> login(@RequestBody User user) {
         User authenticatedUser = userService.authenticate(user.getEmail(), user.getPassword());
         if (authenticatedUser != null) {
-            return ResponseEntity.ok("Login successful!");
+            return ResponseEntity.ok(Map.of("username", authenticatedUser.getUsername()));
         }
         return ResponseEntity.status(401).body("Invalid credentials");
     }
+
+
+
+    @GetMapping("/check-email")
+    public ResponseEntity<Boolean> checkEmail(@RequestParam String email) {
+        boolean exists = userService.isEmailTaken(email);
+        return ResponseEntity.ok(exists);
+    }
+
 }
+
