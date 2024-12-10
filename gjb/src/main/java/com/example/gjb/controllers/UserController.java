@@ -27,16 +27,16 @@ public class UserController {
         }
     }
 
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
-        User authenticatedUser =
-                userService.authenticate(user.getEmail(), user.getPassword());
+        User authenticatedUser = userService.authenticate(user.getEmail(), user.getPassword());
         if (authenticatedUser != null) {
-            // username 반환
             return ResponseEntity.ok(Map.of("username", authenticatedUser.getUsername()));
         }
         return ResponseEntity.status(401).body("Invalid credentials");
     }
+
 
 
     @GetMapping("/check-email")

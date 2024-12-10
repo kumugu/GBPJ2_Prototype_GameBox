@@ -59,16 +59,16 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("login-form").addEventListener("submit", (event) => {
         event.preventDefault(); // 폼 제출 방지
 
-        const email = document.querySelector("#login-form input[name='email']").value; 
+        const email = document.querySelector("#login-form input[name='email']").value; // email 가져오기
         const password = document.querySelector("#login-form input[name='password']").value;
 
         // 로그인 요청
-        fetch('http://localhost:8080/api/users/login', {
+        fetch('http://localhost:8081/api/users/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username, password }) // 기존에 email로 되어있는 부분을 username으로 변경
+            body: JSON.stringify({ email, password }) // email과 password 전송
         })
         .then(response => {
             if (response.ok) {
@@ -82,15 +82,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // username을 사용하여 UI 업데이트
             const username = data.username;
-            document.querySelector('.user-actions').innerHTML = `
-                <div class="user-menu">
-                    <button class="user-btn">${username}</button>
-                    <div class="user-dropdown">
-                        <a href="/profile" class="profile-link">My Profile</a>
-                        <button id="logout-btn" class="logout-btn">Logout</button>
-                    </div>
-                </div>
-            `;
+             document.querySelector('.user-actions').innerHTML = `
+                 <div class="user-menu">
+                     <button class="user-btn">${username}</button>
+                     <div class="user-dropdown">
+                         <a href="/profile" class="profile-link">My Profile</a>
+                         <button id="logout-btn" class="logout-btn">Logout</button>
+                     </div>
+                 </div>
+                 <button class="menu-toggle">☰</button> <!-- 햄버거 버튼 추가 -->
+             `;
+
 
             // 로그아웃 버튼 동작 확인
             document.getElementById("logout-btn").addEventListener("click", () => {
@@ -106,8 +108,8 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error('Error:', error);
             alert('로그인 실패: ' + error.message);
         });
-        console.log('사용자 메뉴로 변경되었습니다.');
     });
+
 
     // 회원가입 폼 제출 시 처리
     const signupForm = document.getElementById("signup-form");
