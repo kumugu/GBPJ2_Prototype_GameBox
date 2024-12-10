@@ -73,8 +73,8 @@ document.getElementById("login-form").addEventListener("submit", (event) => {
             <div class="user-menu">
                 <button class="user-btn">User123</button>
                 <div class="user-dropdown">
-                    <a href="/profile">My Profile</a>
-                    <button id="logout-btn">Logout</button>
+                    <a href="/profile" class="profile-link">My Profile</a>
+                    <button id="logout-btn" class="logout-btn">Logout</button>
                 </div>
             </div>
         `;
