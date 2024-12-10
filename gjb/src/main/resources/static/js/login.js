@@ -2,11 +2,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // 요소 선택
     const loginModal = document.getElementById("login-modal");
     const signupModal = document.getElementById("signup-modal");
-    const loginBtn = document.querySelector(".login-btn"); // 로그인 버튼
-    const signupBtn = document.querySelector(".signup-btn"); // 회원가입 버튼
-    const closeLoginModal = document.getElementById("close-login-modal"); // 로그인 모달 닫기 버튼
-    const closeSignupModal = document.getElementById("close-signup-modal"); // 회원가입 모달 닫기 버튼
-    const backToLoginBtn = document.getElementById("back-to-login"); // 회원가입 뒤로가기 버튼
+    const loginBtn = document.querySelector(".login-btn");
+    const signupBtn = document.querySelector(".signup-btn");
+    const closeLoginModal = document.getElementById("close-login-modal");
+    const closeSignupModal = document.getElementById("close-signup-modal");
+    const backToLoginBtn = document.getElementById("back-to-login");
     const userActions = document.querySelector('.user-actions');
     const toggleToSignupBtn = document.getElementById('toggle-to-signup');
     const toggleToLoginBtn = document.getElementById('toggle-to-login');
@@ -56,39 +56,103 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // 로그인 폼 제출 시 UI 업데이트
-document.getElementById("login-form").addEventListener("submit", (event) => {
-    event.preventDefault(); // 폼 제출 방지
+    document.getElementById("login-form").addEventListener("submit", (event) => {
+        event.preventDefault(); // 폼 제출 방지
 
-    const userActions = document.querySelector('.user-actions');
-    const loginBtn = document.querySelector('.login-btn');
+        const email = document.querySelector("#login-form input[name='email']").value; 
+        const password = document.querySelector("#login-form input[name='password']").value;
 
-    // 로그인 모달 닫기
-    const loginModal = document.getElementById("login-modal");
-    loginModal.classList.add("hidden");
-    loginModal.classList.remove("active");
+        // 로그인 요청
+        fetch('http://localhost:8080/api/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password }) // 기존에 email로 되어있는 부분을 username으로 변경
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json(); // JSON 데이터로 변환
+            } else {
+                throw new Error('로그인 실패');
+            }
+        })
+        .then(data => {
+            console.log('로그인 성공:', data);
 
-    // 기존 login-btn을 User123으로 변경
-    if (loginBtn) {
-        loginBtn.outerHTML = `
-            <div class="user-menu">
-                <button class="user-btn">User123</button>
-                <div class="user-dropdown">
-                    <a href="/profile" class="profile-link">My Profile</a>
-                    <button id="logout-btn" class="logout-btn">Logout</button>
+            // username을 사용하여 UI 업데이트
+            const username = data.username;
+            document.querySelector('.user-actions').innerHTML = `
+                <div class="user-menu">
+                    <button class="user-btn">${username}</button>
+                    <div class="user-dropdown">
+                        <a href="/profile" class="profile-link">My Profile</a>
+                        <button id="logout-btn" class="logout-btn">Logout</button>
+                    </div>
                 </div>
-            </div>
-        `;
-    }
+            `;
 
-    console.log('사용자 메뉴로 변경되었습니다.');
+            // 로그아웃 버튼 동작 확인
+            document.getElementById("logout-btn").addEventListener("click", () => {
+                alert("로그아웃 버튼 클릭됨");
+                location.reload(); // 페이지 새로고침
+            });
 
-    // 로그아웃 버튼 동작 확인
-    document.getElementById("logout-btn").addEventListener("click", () => {
-        alert("로그아웃 버튼 클릭됨");
-        location.reload(); // 페이지 새로고침
+            // 로그인 모달 닫기
+            loginModal.classList.add("hidden");
+            loginModal.classList.remove("active");
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('로그인 실패: ' + error.message);
+        });
+        console.log('사용자 메뉴로 변경되었습니다.');
     });
-});
 
-    
+    // 회원가입 폼 제출 시 처리
+    const signupForm = document.getElementById("signup-form");
+    if (signupForm) {
+        signupForm.addEventListener("submit", (event) => {
+            event.preventDefault(); // 기본 제출 방지
 
+            // 입력값 가져오기
+            const email = signupForm.querySelector("input[name='email']").value;
+            const password = signupForm.querySelector("input[name='password']").value;
+            const username = signupForm.querySelector("input[name='username']").value;
+
+            // 백엔드로 데이터 전송
+            fetch('http://localhost:8080/api/users/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password,
+                    username: username
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                } else {
+                    throw new Error('회원가입 실패');
+                }
+            })
+            .then(data => {
+                console.log('회원가입 성공:', data);
+                alert('회원가입이 완료되었습니다! 로그인해주세요.');
+
+                // 회원가입 모달 닫기 및 로그인 모달 열기
+                signupModal.classList.add("hidden");
+                signupModal.classList.remove("active");
+                loginModal.classList.remove("hidden");
+                loginModal.classList.add("active");
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('회원가입 중 문제가 발생했습니다.');
+            });
+        });
+    }
 });
