@@ -17,15 +17,7 @@
 - Spring Initializer를 통해 기본 프로젝트 생성 및 종속성 설정:
   - `Spring Boot Starter Web`, `Spring Boot Starter Security`, `Spring Boot Starter Data JPA` 등.
 
-### **2. 데이터베이스 연동**
-
-- MySQL 설치 및 설정
-  - 데이터베이스 이름: `rmarn_gjb`
-  - 사용자 계정: `rmarn`@`localhost`
-  - 비밀번호: `1234`
-- MySQL과 Spring Boot의 연동 성공.
-
-### **3. 보안 및 권한 관리**
+### **2. 보안 및 권한 관리**
 
 - Spring Security 기본 설정 커스터마이징:
   - 모든 요청 허용(임시 개발용 설정).
