@@ -74,16 +74,6 @@ GJB/
 └── README.md                 # 프로젝트 설명 파일
 ```
 
-### **3. 데이터베이스 설정**
-
-`application.properties` 파일에 다음과 같이 설정:
-
-```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/rmarn_gjb
-spring.datasource.username=rmarn
-spring.datasource.password=1234
-spring.jpa.hibernate.ddl-auto=update
-```
 ------
 ## **스크린샷**
 
